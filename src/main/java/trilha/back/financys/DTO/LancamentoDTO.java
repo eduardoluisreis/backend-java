@@ -1,15 +1,12 @@
-package trilha.back.financys.LancamentoDTO;
+package trilha.back.financys.DTO;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import trilha.back.financys.Entity.CategoriaEntity;
-import trilha.back.financys.Entity.LancamentoEntity;
 
 import java.io.Serial;
 import java.io.Serializable;
+@Data
 @Getter
 @Setter
 @AllArgsConstructor

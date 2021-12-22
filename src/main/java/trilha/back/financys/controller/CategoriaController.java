@@ -6,19 +6,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import trilha.back.financys.Entity.CategoriaEntity;
-import trilha.back.financys.service.CategoriaService;
+import trilha.back.financys.service.CategoriaServiceImpl;
 
 @RestController
-@RequestMapping(value = "/categorias")
+@RequestMapping(value = "/v1/categorias")
 @Api("FinancysApplication")
 public class CategoriaController {
 
     @Autowired
-    private CategoriaService service;
+    private CategoriaServiceImpl service;
 
     @PostMapping(path = "/salvar")
     @ApiOperation(value = "Salva a lista de Categorias")
-    public ResponseEntity<CategoriaEntity> save(@RequestBody CategoriaEntity categoriaEntity) {
+    public ResponseEntity<CategoriaEntity> createNewCategoria(@RequestBody CategoriaEntity categoriaEntity) {
         return service.createNewCategoria(categoriaEntity);
     }
 
@@ -26,7 +26,8 @@ public class CategoriaController {
     @GetMapping(path = "/listar")
     @ApiOperation(value = "Retornar a lista de categorias")
     public ResponseEntity<CategoriaEntity> getLista() {
-        return ResponseEntity.ok(service.getAllCategoria());
+
+        return ResponseEntity.ok(CategoriaEntityservice.getAllCategoria());
     }
 
     @GetMapping(path = "/{id}")

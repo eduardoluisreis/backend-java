@@ -7,9 +7,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import trilha.back.financys.Entity.LancamentoEntity;
-import trilha.back.financys.LancamentoDTO.LancamentoDTO;
-import trilha.back.financys.service.CategoriaService;
-import trilha.back.financys.service.LancamentoService;
+import trilha.back.financys.DTO.LancamentoDTO;
+import trilha.back.financys.service.CategoriaServiceImpl;
+
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "/lancamentos")
@@ -17,33 +18,33 @@ import trilha.back.financys.service.LancamentoService;
 public class LancamentoController {
 
     @Autowired
-    public CategoriaService categoriaService;
+    private CategoriaServiceImpl categoriaServiceImpl;
 
     @Autowired
-    public LancamentoService lancamentoService;
+    private LancamentoService lancamentoService;
 
     @PostMapping("/salvar")
     @ApiOperation(value = "Salva a lista de Lancamentos")
-    public ResponseEntity<LancamentoEntity> save(@RequestBody LancamentoEntity lancamentoEntityBody) {
+    public ResponseEntity<LancamentoEntity> createNewLancamento(@RequestBody LancamentoEntity lancamentoEntityBody) {
         return lancamentoService.createNewLancamento(lancamentoEntityBody);
 
     }
 
     @GetMapping(path = "/listar")
     @ApiOperation(value = "Retornar a lista de Lancamentos")
-    public ResponseEntity<LancamentoEntity> getLista() {
+    public List<LancamentoEntity> getAllLancamento(LancamentoEntity lancamento) {
 
-        return ResponseEntity.ok().body(lancamentoService.getAllLancamento(LancamentoEntity));
+        return ResponseEntity.ok().body(lancamentoService.getAllLancamento(lancamento));
     }
 
-//    @GetMapping(path = "/{id}")
-//    public ResponseEntity<Object> getLancamento(@PathVariable Long id) {
-//        return ResponseEntity.ok(lancamentoService.getLancamentoById(id));
-//    }
+    @GetMapping(path = "/{id}")
+   public ResponseEntity<Object> getLancamento(@PathVariable Long id) {
+       return ResponseEntity.ok(lancamentoService.getLancamentoById(id));
+   }
 
     @GetMapping(path = "categoria/{id}")
     public ResponseEntity<Object> validateCategoryById(@PathVariable Long id) {
-        return ResponseEntity.ok(categoriaService.getCategoriaById(id));
+        return ResponseEntity.ok(categoriaServiceImpl.getCategoriaById(id));
     }
 
     @ApiOperation(value = "Altera na lista de Lancamentos")
