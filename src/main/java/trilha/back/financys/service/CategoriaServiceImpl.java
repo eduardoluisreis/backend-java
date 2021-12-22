@@ -11,7 +11,9 @@ import trilha.back.financys.exceptions.CategoriaNotFoundException;
 import trilha.back.financys.repository.CategoriaRepository;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class CategoriaServiceImpl {
@@ -21,51 +23,57 @@ public class CategoriaServiceImpl {
     @Autowired
     private ModelMapper modelMapper;
 
-    public ResponseEntity<CategoriaEntity> createNewCategoria(CategoriaEntity categoriaEntity) {
-        repository.save(categoriaEntity);
-        return ResponseEntity.ok().body(categoriaEntity);
+    public ResponseEntity<CategoriaEntity> createNewCategoria(CategoriaDTO categoriaDTO) {
+
+        return ResponseEntity.ok().body(repository.save(mapToEntity(categoriaDTO)));
     }
 
-    public List<CategoriaEntity> getAllCategoria() {
-        return repository.findAll();
+    public List<CategoriaDTO> getAllCategoria() {
+        return repository.findAll()
+                .stream()
+                .map(this::mapToDto)
+                .collect(Collectors.toList());
+
     }
 
-    public CategoriaEntity getCategoriaById(Long id) {
+    public CategoriaEntity getId(Long id) {
         Optional<CategoriaEntity> requestedCategoria = repository.findById(id);
-        if (requestedCategoria.isEmpty()) {
-            throw new CategoriaNotFoundException(String.format("Categoria with id: '%s' not found", id));
+        if (requestedCategoria.isPresent()) {
+            repository.getById(id);
+        }else{
+           System.out.println("id nao encontrado");
         }
-        return requestedCategoria.get();
+       return  repository.getById(id);
     }
 
-    public CategoriaEntity updateCategoria(Long id, CategoriaEntity categoria) {
-        Optional<CategoriaEntity> categoryFromDatabase = repository.findById(id);
-        if (categoryFromDatabase.isEmpty()) {
-            throw new CategoriaNotFoundException(String.format("Category with id: '%s' not found", id));
+    public CategoriaEntity update(Long id, CategoriaEntity entity) throws CategoriaNotFoundException {
+        try {
+            if (Objects.equals(entity.getId(), repository.getById(id))) {
+                repository.save(entity);
+            } else {
+                throw new CategoriaNotFoundException("id ja existe");
+            }
+
+        } catch (CategoriaNotFoundException e) {
+            e.printStackTrace();
         }
-
-        CategoriaEntity categoryToUpdate = categoryFromDatabase.get();
-
-
-        repository.save(mapToEntity(categoria);
-        return categoryToUpdate;
+        return repository.save(entity);
     }
-
-    public String idCategoriaByName(Long idCategory) {
+  /*  public String idCategoriaByName(Long idCategory) {
         CategoriaEntity categoriaEntity = repository.findById(idCategory).orElseThrow();
 
         return categoriaEntity.getName();
-    }
+    }*/
 
     public void deleteCategoryById(Long id) {
         repository.deleteById(id);
     }
 
-    private CategoriaEntity maToDto(CategoriaDTO dto) {
-        return modelMapper.map(dto, CategoriaEntity.class);
+    private CategoriaDTO mapToDto(CategoriaEntity entity) {
+        return modelMapper.map(entity, CategoriaDTO.class);
     }
 
-    private CategoriaDTO mapToEntity(CategoriaEntity entity) {
-      return  modelMapper.map(entity, CategoriaDTO.class );
+    private CategoriaEntity mapToEntity(CategoriaDTO dto) {
+      return  modelMapper.map(dto, CategoriaEntity.class );
     }
 }

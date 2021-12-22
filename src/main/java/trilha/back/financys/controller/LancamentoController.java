@@ -8,7 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import trilha.back.financys.Entity.LancamentoEntity;
 import trilha.back.financys.DTO.LancamentoDTO;
-import trilha.back.financys.service.CategoriaServiceImpl;
 
 import java.util.List;
 
@@ -16,17 +15,14 @@ import java.util.List;
 @RequestMapping(value = "/lancamentos")
 @Api("FinancysApplication")
 public class LancamentoController {
-
-    @Autowired
-    private CategoriaServiceImpl categoriaServiceImpl;
-
-    @Autowired
-    private LancamentoService lancamentoService;
+/*
+ @Autowired
+ private LancamentoServiceImpl service;
 
     @PostMapping("/salvar")
     @ApiOperation(value = "Salva a lista de Lancamentos")
     public ResponseEntity<LancamentoEntity> createNewLancamento(@RequestBody LancamentoEntity lancamentoEntityBody) {
-        return lancamentoService.createNewLancamento(lancamentoEntityBody);
+        return ResponseEntity.ok().body(service.)
 
     }
 
@@ -60,6 +56,6 @@ public class LancamentoController {
         lancamentoService.deleteEntryById(id);
 
         return ResponseEntity.noContent().build();
-    }
+    }*/
 
 }
