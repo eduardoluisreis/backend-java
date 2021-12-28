@@ -34,7 +34,7 @@ public class SwaggerConfig {
                 "API CRUD ",
                 "1.0",
                 "Terms of Service",
-                new Contact("Eduardo Reis","https://wedinfo.freshdesk.com/support/home","eduardo.ferreirareis@nttdata.com"),
+                new Contact("Eduardo Luis Ferreira  Reis","https://wedinfo.freshdesk.com/support/home","eduardoluisreis@gmail.com"),
                 "Apache License Version 2.0",
                 "https://www.apache.org/license.html", new ArrayList<VendorExtension>()
         );

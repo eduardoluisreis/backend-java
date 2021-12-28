@@ -8,4 +8,7 @@ public class LancamentoNotFoundException extends RuntimeException{
     public LancamentoNotFoundException(String message, Long id){
         super(message);
     }
+
+    public LancamentoNotFoundException(String id_ja_existe) {
+    }
 }

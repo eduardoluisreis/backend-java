@@ -1,6 +1,7 @@
 package trilha.back.financys.service;
 
 
+import javassist.tools.rmi.ObjectNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,23 +17,27 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-public class CategoriaServiceImpl {
+public class CategoriaService {
     @Autowired
     private CategoriaRepository repository;
 
     @Autowired
     private ModelMapper modelMapper;
 
+
+    public CategoriaService(CategoriaRepository repository, ModelMapper modelMapper) {
+        this.repository = repository;
+        this.modelMapper = modelMapper;
+    }
+
     public ResponseEntity<CategoriaEntity> createNewCategoria(CategoriaDTO categoriaDTO) {
 
         return ResponseEntity.ok().body(repository.save(mapToEntity(categoriaDTO)));
     }
 
-    public List<CategoriaDTO> getAllCategoria() {
-        return repository.findAll()
-                .stream()
-                .map(this::mapToDto)
-                .collect(Collectors.toList());
+    public List<CategoriaEntity> getAllCategoria(){
+     return ResponseEntity.ok().body(repository.findAll()).getBody();
+
 
     }
 
@@ -46,24 +51,13 @@ public class CategoriaServiceImpl {
        return  repository.getById(id);
     }
 
-    public CategoriaEntity update(Long id, CategoriaEntity entity) throws CategoriaNotFoundException {
-        try {
-            if (Objects.equals(entity.getId(), repository.getById(id))) {
-                repository.save(entity);
-            } else {
-                throw new CategoriaNotFoundException("id ja existe");
-            }
+    public CategoriaEntity update( CategoriaEntity entity) throws ObjectNotFoundException {
 
-        } catch (CategoriaNotFoundException e) {
-            e.printStackTrace();
-        }
-        return repository.save(entity);
+        if((repository.findById(entity.getId()).isEmpty())) {
+            throw new ObjectNotFoundException("CategoriaEntity" + CategoriaEntity.class.getName()+ "not found");
+        }else
+            return repository.save(entity);
     }
-  /*  public String idCategoriaByName(Long idCategory) {
-        CategoriaEntity categoriaEntity = repository.findById(idCategory).orElseThrow();
-
-        return categoriaEntity.getName();
-    }*/
 
     public void deleteCategoryById(Long id) {
         repository.deleteById(id);

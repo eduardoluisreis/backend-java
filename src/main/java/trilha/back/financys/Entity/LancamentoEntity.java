@@ -1,7 +1,7 @@
 package trilha.back.financys.Entity;
 
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -9,6 +9,7 @@ import javax.validation.constraints.*;
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "lancamentos")
@@ -16,14 +17,15 @@ import java.util.Date;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
+
 public class LancamentoEntity implements Serializable {
-    @Serial
-    private static final long serialVersionUID= 1L;
+
+    private static final Long serialVersionUID= 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+
+    private Long id;
 
     @NotEmpty(message = " Campo nome não pode ser vazio ou nulo")
     @NotNull(message = " Campo nome não pode ser vazio ou nulo")
@@ -32,12 +34,12 @@ public class LancamentoEntity implements Serializable {
 
     @NotEmpty(message = "Campo de descrição não pode ser vazia ou nula")
     @NotNull(message = "Campo de descrição não pode ser vazia ou nula")
-    @Size(min = 15, max = 150, message = "min 15 a 150 caracteres")
+    @Size(min = 5, max = 150, message = "min 15 a 150 caracteres")
     private String description;
 
     @NotEmpty(message = "Campo tipo não pode ser nula ou vazia")
     @NotNull(message = "Campo tipo não pode ser nula ou vazia")
-    @Size(min = 3, max = 10, message = "min 3 a 10 caracteres")
+    @Size(min = 3, max = 15, message = "min 3 a 10 caracteres")
     private String type;
 
     @NotEmpty(message = "Valor montante não pode ser nulo ou vazio")
@@ -53,9 +55,10 @@ public class LancamentoEntity implements Serializable {
     @NotNull(message = "O campo pago não pode ser nulo ou vazio, aceita apenas sim ou não")
     private boolean paid;
 
-    @ManyToOne
-    @JoinColumn(name = "categoryid", referencedColumnName = "id")
-   private CategoriaEntity categoryid;
 
+    @ManyToOne
+    @JoinColumn(name = "categoryId", referencedColumnName = "id")
+    //@JsonIgnore
+    private  CategoriaEntity categoryId;
 
 }

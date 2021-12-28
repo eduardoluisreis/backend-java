@@ -5,16 +5,15 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.io.Serializable;
+
 
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class ChartDTO implements Serializable {
+public class ChartDTO {
 
-    private static final long serialVersionUID = 1L;
 
     private String name;
     private String type;

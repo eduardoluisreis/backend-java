@@ -7,7 +7,7 @@ import trilha.back.financys.Entity.LancamentoEntity;
 import java.util.Optional;
 
 @Repository
-public interface LancamentoRepository extends JpaRepository<LancamentoEntity, Long> {
+public interface LancamentoRepository extends JpaRepository<LancamentoEntity, Long>{
 
-    Optional<LancamentoEntity> findAllById(Long id);
+
 }

@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import trilha.back.financys.Entity.LancamentoEntity;
 import trilha.back.financys.DTO.LancamentoDTO;
+import trilha.back.financys.service.LancamentoService;
 
 import java.util.List;
 
@@ -15,47 +16,46 @@ import java.util.List;
 @RequestMapping(value = "/lancamentos")
 @Api("FinancysApplication")
 public class LancamentoController {
-/*
+
  @Autowired
- private LancamentoServiceImpl service;
+ private LancamentoService service;
 
     @PostMapping("/salvar")
     @ApiOperation(value = "Salva a lista de Lancamentos")
-    public ResponseEntity<LancamentoEntity> createNewLancamento(@RequestBody LancamentoEntity lancamentoEntityBody) {
-        return ResponseEntity.ok().body(service.)
+    @ResponseStatus(HttpStatus.OK)
+    public void createNewLancamento(@RequestBody LancamentoEntity lancamentoEntity) {
+       service.createNewLancamento(lancamentoEntity);
 
     }
 
     @GetMapping(path = "/listar")
     @ApiOperation(value = "Retornar a lista de Lancamentos")
-    public List<LancamentoEntity> getAllLancamento(LancamentoEntity lancamento) {
-
-        return ResponseEntity.ok().body(lancamentoService.getAllLancamento(lancamento));
+    public ResponseEntity<List<LancamentoEntity>> getAllLancamento( ){
+        return ResponseEntity.ok().body(service.getAllLancamento());
     }
 
     @GetMapping(path = "/{id}")
-   public ResponseEntity<Object> getLancamento(@PathVariable Long id) {
-       return ResponseEntity.ok(lancamentoService.getLancamentoById(id));
+   public ResponseEntity<LancamentoEntity> getId(@PathVariable Long id) {
+       return ResponseEntity.ok(service.getId(id));
    }
 
-    @GetMapping(path = "categoria/{id}")
-    public ResponseEntity<Object> validateCategoryById(@PathVariable Long id) {
-        return ResponseEntity.ok(categoriaServiceImpl.getCategoriaById(id));
-    }
+//    @GetMapping(path = "lancamento/{id}")
+//    public ResponseEntity<Object> validateCategoryById(@PathVariable Long id) {
+//        return ResponseEntity.ok(service.getLancamentoById(id));
+//    }
 
     @ApiOperation(value = "Altera na lista de Lancamentos")
-    @PatchMapping(value = "/updateby{id}")
+    @PutMapping(value = "/updateby{id}")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<LancamentoEntity> updateid(@PathVariable("id") Long id, @RequestBody LancamentoDTO lancamentoDTO) {
-     return ResponseEntity.ok().body(lancamentoService.updateLancamento(id, lancamentoDTO));
+    public ResponseEntity<LancamentoEntity> updateid(@PathVariable("id") Long id, @RequestBody LancamentoEntity entity) {
+     return ResponseEntity.ok().body(service.updateid(id, entity));
     }
 
 
     @DeleteMapping(value = "/deletar/{id}")
-    public ResponseEntity<Object> lancamentoDeletar(@PathVariable("id") Long id) {
-        lancamentoService.deleteEntryById(id);
-
-        return ResponseEntity.noContent().build();
-    }*/
+    @ResponseStatus(value = HttpStatus.OK)
+    public void lancamentoDeletar(@PathVariable("id") Long id) {
+            service.deleteEntryById(id);
+    }
 
 }
