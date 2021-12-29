@@ -14,7 +14,7 @@ public class LancamentoDTO  {
     private String name;
     private String type;
     private String amount;
-    private CategoriaEntity categoriaEntity;
+
 
 
     }

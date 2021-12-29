@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import trilha.back.financys.DTO.LancamentoDTO;
+import trilha.back.financys.DTO.LancamentoResponseDTO;
 import trilha.back.financys.Entity.LancamentoEntity;
 import trilha.back.financys.exceptions.LancamentoNotFoundException;
 import trilha.back.financys.repository.LancamentoRepository;
@@ -27,9 +28,9 @@ public class LancamentoService {
         this.modelMapper = modelMapper;
     }
 
-    public void createNewLancamento(LancamentoEntity lancamentoEntity) {
+    public LancamentoEntity save(LancamentoEntity lancamentoEntity){
 
-         ResponseEntity.ok().body(repository.save((lancamentoEntity)));
+        return  repository.save(lancamentoEntity);
     }
 
     public List<LancamentoEntity> getAllLancamento() {
@@ -68,7 +69,7 @@ public class LancamentoService {
         return modelMapper.map(entity, LancamentoDTO.class);
     }
 
-    private LancamentoEntity mapToEntity(LancamentoDTO dto) {
+    private LancamentoEntity mapToEntity(LancamentoResponseDTO dto) {
         return modelMapper.map(dto, LancamentoEntity.class);
     }
 

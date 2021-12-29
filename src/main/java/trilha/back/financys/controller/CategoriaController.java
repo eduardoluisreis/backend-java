@@ -23,8 +23,9 @@ public class CategoriaController {
 
     @PostMapping(path = "/salvar")
     @ApiOperation(value = "Salva a lista de Categorias")
-    public ResponseEntity<CategoriaEntity> createNewCategoria(@RequestBody CategoriaDTO categoriaDTO) {
-        return ResponseEntity.ok().body(service.createNewCategoria(categoriaDTO)).getBody();
+    @ResponseStatus(HttpStatus.OK)
+    public CategoriaEntity salvar(@RequestBody CategoriaEntity entity) {
+        return service.salvar(entity);
     }
 
 

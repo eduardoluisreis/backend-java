@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import trilha.back.financys.DTO.LancamentoResponseDTO;
 import trilha.back.financys.Entity.LancamentoEntity;
 import trilha.back.financys.DTO.LancamentoDTO;
 import trilha.back.financys.service.LancamentoService;
@@ -23,8 +24,9 @@ public class LancamentoController {
     @PostMapping("/salvar")
     @ApiOperation(value = "Salva a lista de Lancamentos")
     @ResponseStatus(HttpStatus.OK)
-    public void createNewLancamento(@RequestBody LancamentoEntity lancamentoEntity) {
-       service.createNewLancamento(lancamentoEntity);
+    public LancamentoEntity salvar(@RequestBody LancamentoEntity entity) {
+    return  ResponseEntity.ok().body(service.save(entity)).getBody();
+
 
     }
 

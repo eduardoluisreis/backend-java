@@ -6,15 +6,11 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import trilha.back.financys.Entity.CategoriaEntity;
 import trilha.back.financys.DTO.CategoriaDTO;
-import trilha.back.financys.exceptions.CategoriaNotFoundException;
+import trilha.back.financys.Entity.CategoriaEntity;
 import trilha.back.financys.repository.CategoriaRepository;
-
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class CategoriaService {
@@ -30,13 +26,13 @@ public class CategoriaService {
         this.modelMapper = modelMapper;
     }
 
-    public ResponseEntity<CategoriaEntity> createNewCategoria(CategoriaDTO categoriaDTO) {
+    public CategoriaEntity salvar(CategoriaEntity categoriaEntity) {
 
-        return ResponseEntity.ok().body(repository.save(mapToEntity(categoriaDTO)));
+        return repository.save(categoriaEntity);
     }
 
-    public List<CategoriaEntity> getAllCategoria(){
-     return ResponseEntity.ok().body(repository.findAll()).getBody();
+    public List<CategoriaEntity> getAllCategoria() {
+        return ResponseEntity.ok().body(repository.findAll()).getBody();
 
 
     }
@@ -45,17 +41,17 @@ public class CategoriaService {
         Optional<CategoriaEntity> requestedCategoria = repository.findById(id);
         if (requestedCategoria.isPresent()) {
             repository.getById(id);
-        }else{
-           System.out.println("id nao encontrado");
+        } else {
+            System.out.println("id nao encontrado");
         }
-       return  repository.getById(id);
+        return repository.getById(id);
     }
 
-    public CategoriaEntity update( CategoriaEntity entity) throws ObjectNotFoundException {
+    public CategoriaEntity update(CategoriaEntity entity) throws ObjectNotFoundException {
 
-        if((repository.findById(entity.getId()).isEmpty())) {
-            throw new ObjectNotFoundException("CategoriaEntity" + CategoriaEntity.class.getName()+ "not found");
-        }else
+        if ((repository.findById(entity.getId()).isEmpty())) {
+            throw new ObjectNotFoundException("CategoriaEntity" + CategoriaEntity.class.getName() + "not found");
+        } else
             return repository.save(entity);
     }
 
@@ -68,6 +64,6 @@ public class CategoriaService {
     }
 
     private CategoriaEntity mapToEntity(CategoriaDTO dto) {
-      return  modelMapper.map(dto, CategoriaEntity.class );
+        return modelMapper.map(dto, CategoriaEntity.class);
     }
 }
