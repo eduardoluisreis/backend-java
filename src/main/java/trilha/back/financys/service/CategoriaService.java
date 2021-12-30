@@ -47,15 +47,17 @@ public class CategoriaService {
         return repository.getById(id);
     }
 
-    public CategoriaEntity update(CategoriaEntity entity) throws ObjectNotFoundException {
+    public void atualizar(CategoriaEntity categoria, Long id) {
 
-        if ((repository.findById(entity.getId()).isEmpty())) {
-            throw new ObjectNotFoundException("CategoriaEntity" + CategoriaEntity.class.getName() + "not found");
-        } else
-            return repository.save(entity);
+        CategoriaEntity categoriaEdita = repository.findById(id)
+                .orElseThrow();
+        categoriaEdita.setName(categoria.getName());
+        categoriaEdita.setDescription(categoria.getDescription());
+        ResponseEntity.ok().body(repository.save(categoriaEdita));
+
     }
 
-    public void deleteCategoryById(Long id) {
+    public void deletar(Long id) {
         repository.deleteById(id);
     }
 

@@ -18,39 +18,40 @@ import java.util.List;
 @Api("FinancysApplication")
 public class CategoriaController {
 
-    @Autowired
-    private CategoriaService service;
 
-    @PostMapping(path = "/salvar")
-    @ApiOperation(value = "Salva a lista de Categorias")
-    @ResponseStatus(HttpStatus.OK)
-    public CategoriaEntity salvar(@RequestBody CategoriaEntity entity) {
-        return service.salvar(entity);
-    }
+    @Autowired
+    private CategoriaService categoriaService;
 
 
     @GetMapping(path = "/listar")
-    @ApiOperation(value = "Retornar a lista de categorias")
-    public List<CategoriaEntity> getAllCategoria() {
-        return ResponseEntity.ok().body(service.getAllCategoria()).getBody();
+    @ResponseStatus(HttpStatus.OK)
+    public List<CategoriaEntity> getAll() {
+        return ResponseEntity.ok().body(categoriaService.getAllCategoria()).getBody();
     }
 
-    @GetMapping(path = "/{id}")
-    public ResponseEntity<CategoriaEntity> getId(@PathVariable Long id) {
-        return ResponseEntity.ok(service.getId(id));
+    @GetMapping(path = "/buscar/{id}")
+    public ResponseEntity<CategoriaEntity> getId(@PathVariable("id") Long id) {
+        return ResponseEntity.ok(categoriaService.getId(id));
     }
 
-    @ApiOperation(value = "Altera itens na lista de categorias")
-    @PutMapping(path = "/updateby/{id}")
-    @ResponseStatus( value= HttpStatus.ACCEPTED)
-    public CategoriaEntity update( @RequestBody CategoriaEntity entity) throws ObjectNotFoundException {
-        return ResponseEntity.ok().body(service.update(entity)).getBody();
+    @PostMapping(path = "/salvar")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<CategoriaEntity> salvar(@RequestBody CategoriaEntity categoria) {
+        return ResponseEntity.ok().body(categoriaService.salvar(categoria));
     }
 
-    @DeleteMapping(value = "/deletar/{id}")
-    public void categoriaDeletar(@PathVariable("id") Long id) {
-        service.deleteCategoryById(id);
-        ResponseEntity.status(HttpStatus.OK);
+    @DeleteMapping(path = "/deletar/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public void deletar(@PathVariable("id") Long id) {
+        categoriaService.deletar(id);
+
+    }
+
+    @PutMapping(path = "/update/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public void atualizar(@PathVariable("id") Long id, @RequestBody CategoriaEntity categoria) {
+        categoriaService.atualizar(categoria, id);
+
     }
 }
 

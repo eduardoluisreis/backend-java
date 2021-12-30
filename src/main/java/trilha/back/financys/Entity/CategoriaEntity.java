@@ -1,6 +1,7 @@
 package trilha.back.financys.Entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,7 +27,7 @@ public class CategoriaEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="id_Categoria")
+    @Column(name ="id_categoria")
     private Long id;
 
     @Size(min = 3, max = 15, message = "min 3 a 15 caracteres"+ "não pode ser nulo ou vazio")
@@ -37,10 +38,6 @@ public class CategoriaEntity implements Serializable {
     @Column(name= "description", nullable = false)
     private String description;
 
-
-    @OneToMany(mappedBy="categoryId")
-    //@JsonIgnore
-    private List<LancamentoEntity> lancamentoEntities;
 
 
 }
