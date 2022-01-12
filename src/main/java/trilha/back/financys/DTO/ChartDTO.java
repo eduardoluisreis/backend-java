@@ -17,5 +17,5 @@ public class ChartDTO {
 
     private String name;
     private String type;
-    private String amount;
+    private Double amount;
 }

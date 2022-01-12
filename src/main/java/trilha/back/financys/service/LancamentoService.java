@@ -29,6 +29,11 @@ public class LancamentoService {
         this.lancamentoRepository = lancamentoRepository;
         this.modelMapper = modelMapper;
     }
+    public LancamentoEntity salvar(LancamentoDTO lancamentoDTO) {
+
+        return  lancamentoRepository.save(mapToEntity(lancamentoDTO));
+    }
+
     public List<LancamentoEntity> getAll() {
         return ResponseEntity.ok().body(lancamentoRepository.findAll()).getBody();
 
@@ -63,16 +68,12 @@ public class LancamentoService {
         lancamentoRepository.deleteById(id);
     }
 
-    public LancamentoEntity salvar(LancamentoEntity lancamentoEntity) {
-        return lancamentoRepository.save(lancamentoEntity);
-    }
-
 
     private LancamentoDTO mapToDto(LancamentoEntity entity) {
         return modelMapper.map(entity, LancamentoDTO.class);
     }
 
-    private LancamentoEntity mapToEntity(LancamentoResponseDTO dto) {
+    private LancamentoEntity mapToEntity(LancamentoDTO dto) {
         return modelMapper.map(dto, LancamentoEntity.class);
     }
 

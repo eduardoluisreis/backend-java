@@ -38,8 +38,8 @@ public class LancamentoController {
 
     @PostMapping (path = "/salvar")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<LancamentoEntity>salvar(@RequestBody LancamentoEntity lancamento) {
-        return ResponseEntity.ok().body(lancamentoService.salvar(lancamento));
+    public ResponseEntity<LancamentoEntity>salvar(@RequestBody LancamentoDTO lancamentoDTO) {
+        return ResponseEntity.ok().body(lancamentoService.salvar(lancamentoDTO));
     }
     @DeleteMapping(path = "/deletar/{id}")
     public void deletar(@PathVariable("id") Long id) {

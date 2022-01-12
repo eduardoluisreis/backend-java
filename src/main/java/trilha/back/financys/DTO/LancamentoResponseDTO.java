@@ -15,6 +15,8 @@ public class LancamentoResponseDTO {
     private Long id;
     private String name;
     private String type;
-    private String amount;
+    private Double amount;
+    private String date;
+    private boolean paid;
 
 }

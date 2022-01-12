@@ -9,11 +9,9 @@ import lombok.*;
 @Getter
 @Setter
 
-public class   CategoriaDTO {
+public class  CategoriaDTO {
 
     private String name;
     private String description;
-
-
 
 }

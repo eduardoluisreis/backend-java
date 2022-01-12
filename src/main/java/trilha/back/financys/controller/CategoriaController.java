@@ -36,8 +36,8 @@ public class CategoriaController {
 
     @PostMapping(path = "/salvar")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<CategoriaEntity> salvar(@RequestBody CategoriaEntity categoria) {
-        return ResponseEntity.ok().body(categoriaService.salvar(categoria));
+    public ResponseEntity<CategoriaEntity> salvar(@RequestBody CategoriaDTO categoriaDTO) {
+        return ResponseEntity.ok().body(categoriaService.salvar(categoriaDTO));
     }
 
     @DeleteMapping(path = "/deletar/{id}")
@@ -54,9 +54,3 @@ public class CategoriaController {
 
     }
 }
-
-
-
-
-
-

@@ -26,9 +26,9 @@ public class CategoriaService {
         this.modelMapper = modelMapper;
     }
 
-    public CategoriaEntity salvar(CategoriaEntity categoriaEntity) {
+    public CategoriaEntity salvar(CategoriaDTO categoriaDTO) {
 
-        return repository.save(categoriaEntity);
+        return repository.save(mapToEntity(categoriaDTO));
     }
 
     public List<CategoriaEntity> getAllCategoria() {

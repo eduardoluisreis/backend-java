@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.engine.spi.SessionFactoryImplementor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
@@ -37,7 +38,6 @@ public class CategoriaEntity implements Serializable {
     @Size(min = 15, max = 50, message = "min 15 a 50 caracteres")
     @Column(name= "description", nullable = false)
     private String description;
-
 
 
 }
