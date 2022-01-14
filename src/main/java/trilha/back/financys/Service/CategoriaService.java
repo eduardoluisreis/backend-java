@@ -1,14 +1,13 @@
-package trilha.back.financys.service;
+package trilha.back.financys.Service;
 
 
-import javassist.tools.rmi.ObjectNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import trilha.back.financys.DTO.CategoriaDTO;
 import trilha.back.financys.Entity.CategoriaEntity;
-import trilha.back.financys.repository.CategoriaRepository;
+import trilha.back.financys.Repository.CategoriaRepository;
 import java.util.List;
 import java.util.Optional;
 

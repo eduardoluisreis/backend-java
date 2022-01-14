@@ -1,15 +1,13 @@
-package trilha.back.financys.controller;
+package trilha.back.financys.Controller;
 
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import javassist.tools.rmi.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import trilha.back.financys.DTO.CategoriaDTO;
 import trilha.back.financys.Entity.CategoriaEntity;
-import trilha.back.financys.service.CategoriaService;
+import trilha.back.financys.Service.CategoriaService;
 
 import java.util.List;
 
