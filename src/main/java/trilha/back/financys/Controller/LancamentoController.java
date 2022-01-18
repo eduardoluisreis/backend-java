@@ -1,6 +1,7 @@
 package trilha.back.financys.Controller;
 
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -44,4 +45,12 @@ public class LancamentoController {
     public void update(@PathVariable("id") Long id, @RequestBody LancamentoEntity lancamento) {
         lancamentoService.atualizaLancamento(lancamento, id);
     }
+
+    @GetMapping(path = "/calcula/{x}/{y}")
+    @ApiOperation(value = "Calcula Média de X e Y")
+    public Integer calculaMedia (@PathVariable("x")Integer x,
+                                 @PathVariable("y")Integer y){
+        return lancamentoService.calculaMedia(x,y);
+    }
+
 }

@@ -1,4 +1,4 @@
-package trilha.back.financys.ExceptionsHandler;
+package trilha.back.financys.Exceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -8,10 +8,13 @@ public class DivisaoZeroException extends RuntimeException {
 
 
     private static final long serialVersionUid = 1L;
+
     public DivisaoZeroException(String message, Throwable cause){
+
         super(message, cause);
     }
     public DivisaoZeroException(String message){
+
         super(message);
     }
 }

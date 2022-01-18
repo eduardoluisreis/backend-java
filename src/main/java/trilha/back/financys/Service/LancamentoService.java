@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import trilha.back.financys.DTO.LancamentoDTO;
 import trilha.back.financys.Entity.LancamentoEntity;
+import trilha.back.financys.Exceptions.DivisaoZeroException;
 import trilha.back.financys.Repository.LancamentoRepository;
 import org.apache.logging.log4j.Logger;
 import java.util.List;
@@ -68,6 +69,18 @@ public class LancamentoService {
 
     private LancamentoDTO mapToDto(LancamentoEntity entity) {
         return modelMapper.map(entity, LancamentoDTO.class);
+    }
+
+    public Integer calculaMedia(Integer x , Integer y) throws DivisaoZeroException {
+        try{
+            if(y<=0){
+                throw new ("DivisaoZeroException");
+            }
+        }catch (ArithmeticException ex){
+            ex.printStackTrace();
+        }
+        calculaMedia(10,0);
+        return (x/y);
     }
 
     private LancamentoEntity mapToEntity(LancamentoDTO dto) {
