@@ -72,14 +72,17 @@ public class LancamentoService {
     }
 
     public Integer calculaMedia(Integer x , Integer y) throws DivisaoZeroException {
-        try{
+//        int x = 10;
+//        int y =0;
+
+        try {
             if(y<=0){
-                throw new ("DivisaoZeroException");
+                throw new DivisaoZeroException("NÃO EXISTE DIVISÃO POR ZERO");
             }
-        }catch (ArithmeticException ex){
-            ex.printStackTrace();
+        }catch (ArithmeticException e){
+            e.printStackTrace();
         }
-        calculaMedia(10,0);
+
         return (x/y);
     }
 

@@ -32,13 +32,13 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<String>("O ID da Categoria não foi encontrado.", HttpStatus.NOT_FOUND);
     }
 
-    @ExceptionHandler(LancamentosNotFoundException.class)
-    public ResponseEntity<String> lancamentosNotFoundException(LancamentosNotFoundException lancamentosNotFoundException){
+    @ExceptionHandler(LancamentoNotFoundException.class)
+    public ResponseEntity<String> lancamentoNotFoundException(LancamentoNotFoundException lancamentoNotFoundException){
         return new ResponseEntity<String>("O ID do Lançamento não foi encontrado",HttpStatus.NOT_FOUND);
     }
 
-    @ExceptionHandler(LancamentosRegisteredException.class)
-    public ResponseEntity<String> lancamentoRegisteredException( LancamentosRegisteredException lancamentoRegisteredException){
+    @ExceptionHandler(LancamentoRegisteredException.class)
+    public ResponseEntity<String> lancamentoRegisteredException( LancamentoRegisteredException lancamentoRegisteredException){
         return new ResponseEntity<String>("Lançamento já existente na base de dados", HttpStatus.BAD_REQUEST);
     }
 
